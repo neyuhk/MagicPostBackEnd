@@ -41,9 +41,14 @@ class OrderRepoImpl(
 //        )
 //    }
     override fun updateStatus(orderStatusResp: OrderStatusResp): Order {
-        val oder = orderById(orderStatusResp.oderId)
-        val updatedOrderStatus = oder.updateStatus(orderStatusResp)
-        return mongoTemplate.save(updatedOrderStatus)
+        return transactionTemplate.execute { _ ->
+            val oder = orderById(orderStatusResp.oderId)
+            val updatedOrderStatus = oder.updateStatus(orderStatusResp)
+            return@execute mongoTemplate.save(updatedOrderStatus)
+        } ?: throw ResponseStatusException(
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                "Cannot update order status now"
+        )
     }
 
 //    override fun updateStatus(orderStatusReq: OrderStatusReq): Order {

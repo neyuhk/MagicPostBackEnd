@@ -25,7 +25,7 @@ class OrderStatusRepoImpl(
             return@execute mongoTemplate.save(updatedStatus)
         } ?: throw ResponseStatusException(
                 HttpStatus.INTERNAL_SERVER_ERROR,
-                "Cannot update location now. Please try again"
+                "Cannot update order status now"
         )
         }
 

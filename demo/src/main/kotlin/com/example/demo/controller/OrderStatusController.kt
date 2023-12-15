@@ -32,6 +32,6 @@ class OrderStatusController(
         @ModelAttribute serviceAddressReq: ServiceAddressReq,
         @PathVariable id: String
     ) : OrderStatusResp {
-        return orderStatusServiceImpl.updateStatus(serviceAddressReq)
+        return orderStatusServiceImpl.updateStatus(id, serviceAddressReq)
     }
 }

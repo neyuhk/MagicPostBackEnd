@@ -23,7 +23,7 @@ class OrderStatusServiceImpl(
         return orderResp
     }
 
-    override fun updateStatus(serviceAddressReq: ServiceAddressReq): OrderStatusResp {
+    override fun updateStatus(id : String,serviceAddressReq: ServiceAddressReq): OrderStatusResp {
         val newStatus = orderStatusRepoImpl.updateStatus(serviceAddressReq)
         val orderStatusResp = OrderStatusResp(newStatus)
         updateOrderStatus(orderStatusResp)
