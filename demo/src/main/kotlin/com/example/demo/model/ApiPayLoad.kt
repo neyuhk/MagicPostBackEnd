@@ -33,7 +33,7 @@ data class LoginResp(
 )
 
 data class ServiceAddressReq(
-    val id : String,
+//    val id : String,
     val name : String,
     val address: String,
 )

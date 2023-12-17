@@ -7,7 +7,7 @@ interface OrderStatusService {
 //    fun createStatus(orderReq: OrderReq) : OrderStatusResp
     fun updateOrderStatus(orderStatusResp: OrderStatusResp): OrderResp
     fun updateStatus(id: String, serviceAddressReq: ServiceAddressReq) : OrderStatusResp
-    fun getStatus(orderId : String) : OrderStatusResp
+    fun getOrderStatusById(orderId : String) : OrderStatusResp
     fun listStatus() : List<OrderStatusResp>
     fun listStatusById(orderId: String) : List<OrderStatusResp>
 }

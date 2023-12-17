@@ -18,10 +18,25 @@ class OrderStatusController(
 //        return orderStatusServiceImpl.createStatus(orderStatusReq, serviceAddressReq, orderReq)
 //    }
 
+//    @GetMapping("/{id}")
+//    fun getListOrderStatusById(@PathVariable("id") id: String) : List<OrderStatusResp> {
+//        return orderStatusServiceImpl.listStatusById(id)
+//    }
+
     @GetMapping("/{id}")
-    fun getOrderStatusById(@PathVariable("id") id: String) : List<OrderStatusResp> {
+    fun getOrderStatusById(@PathVariable("id") id: String) :  OrderStatusResp {
+        val listOrderStatusById = orderStatusServiceImpl.listStatusById(id)
+        val index : Int = listOrderStatusById.size - 1
+        val orderStatusResp : OrderStatusResp = listOrderStatusById[index]
+//        return orderStatusServiceImpl.getOrderStatusById(id)
+        return orderStatusResp
+    }
+
+    @GetMapping("/listStatus/{id}")
+    fun getListOrderStatusById(@PathVariable("id") id: String) : List<OrderStatusResp>  {
         return orderStatusServiceImpl.listStatusById(id)
     }
+
     @GetMapping("/orderStatus")
     fun listOrderStatus() : List<OrderStatusResp> {
         return orderStatusServiceImpl.listStatus()

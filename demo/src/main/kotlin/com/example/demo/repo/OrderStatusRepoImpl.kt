@@ -1,6 +1,5 @@
 package com.example.demo.repo
 
-import com.example.demo.model.Order
 import com.example.demo.model.OrderStatus
 import com.example.demo.model.ServiceAddressReq
 import org.springframework.data.mongodb.core.MongoTemplate
@@ -18,9 +17,9 @@ class OrderStatusRepoImpl(
         return mongoTemplate.save(orderStatus)
     }
 
-    override fun updateStatus(serviceAddressReq: ServiceAddressReq): OrderStatus {
+    override fun updateStatus(orderId:String,serviceAddressReq: ServiceAddressReq): OrderStatus {
         return transactionTemplate.execute{_ ->
-            val orderStatus = getStatus(serviceAddressReq.id)
+            val orderStatus = getStatusById(orderId)
             val updatedStatus = orderStatus.update(serviceAddressReq)
             return@execute mongoTemplate.save(updatedStatus)
         } ?: throw ResponseStatusException(
@@ -29,11 +28,20 @@ class OrderStatusRepoImpl(
         )
         }
 
-    override fun getStatus(orderId: String): OrderStatus {
-        return mongoTemplate.findById(orderId, OrderStatus::class.java)?:throw ResponseStatusException(
+    override fun getStatusById(orderId: String): OrderStatus {
+        val listStatus : List<OrderStatus> = mongoTemplate.findAll(OrderStatus::class.java)
+        for(orderStatus : OrderStatus in listStatus)
+            if(orderStatus.orderId == orderId)
+                return orderStatus
+        throw ResponseStatusException(
                 HttpStatus.NOT_FOUND,
                 "Cannot find any event with id $orderId"
         )
+
+//        return mongoTemplate.findById(orderId, OrderStatus::class.java)?:throw ResponseStatusException(
+//                HttpStatus.NOT_FOUND,
+//                "Cannot find any event with id $orderId"
+//        )
     }
 
     override fun getListStatus(): List<OrderStatus> {
@@ -42,11 +50,15 @@ class OrderStatusRepoImpl(
 
     override fun getListStatusById(orderId: String): List<OrderStatus> {
         val listStatus : List<OrderStatus> = mongoTemplate.findAll(OrderStatus::class.java)
-        val listOrderStatus : List<OrderStatus> = listOf()
+//        val listOrderStatus = List<OrderStatus>
+        var listOrderStatus : MutableList<OrderStatus> = mutableListOf()
         for (status in listStatus){
             if(status.orderId == orderId) {
-                listOrderStatus.plus(status)
+                listOrderStatus.add(status)
             }
+            println(listOrderStatus.size)
+            println(status.orderId)
+            println(orderId)
         }
         return listOrderStatus
     }

@@ -1,12 +1,10 @@
 package com.example.demo.service
 
 import com.example.demo.model.*
-import com.example.demo.repo.OrderRepo
 import com.example.demo.repo.OrderRepoImpl
 import com.example.demo.repo.OrderStatusRepoImpl
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import reactor.core.publisher.Mono
 
 @Suppress("SpringJavaInjectionPointsAutowiringInspection")
 @RestController
@@ -39,7 +37,7 @@ class OrderServiceImpl(
     }
 
     override fun getOrderStatus(orderId: String): OrderStatusResp {
-        return orderStatusServiceImpl.getStatus(orderId)
+        return orderStatusServiceImpl.getOrderStatusById(orderId)
     }
 
 
