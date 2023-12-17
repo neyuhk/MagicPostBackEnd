@@ -19,6 +19,7 @@ data class UserReq(
         val email: String,
         var password: String,
         var rePassword: String,
+        var phone_number : String
 )
 
 data class LoginReq(

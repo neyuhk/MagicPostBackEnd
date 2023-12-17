@@ -8,7 +8,7 @@ import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 
 @RestController
-//@RequestMapping("api/v1/orderStatus")
+    @RequestMapping("api/v1/orderStatus")
 class OrderStatusController(
         val orderStatusServiceImpl: OrderStatusServiceImpl,
         val orderServiceImpl: OrderServiceImpl
@@ -32,12 +32,12 @@ class OrderStatusController(
         return orderStatusResp
     }
 
-    @GetMapping("/listStatus/{id}")
+    @GetMapping("listStatus/{id}")
     fun getListOrderStatusById(@PathVariable("id") id: String) : List<OrderStatusResp>  {
         return orderStatusServiceImpl.listStatusById(id)
     }
 
-    @GetMapping("/orderStatus")
+    @GetMapping()
     fun listOrderStatus() : List<OrderStatusResp> {
         return orderStatusServiceImpl.listStatus()
     }

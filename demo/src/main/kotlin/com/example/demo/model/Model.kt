@@ -1,24 +1,31 @@
 package com.example.demo.model
 
-import com.example.demo.util.utils.utils
+import com.example.demo.util.utils
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import java.time.LocalDate
+import java.util.*
+import java.util.stream.Collectors
 
 interface DemoIndentity{
     val id : String
     val username : String
     val email : String
     val password : String
+    val phone_number : String
+    val role : Role
 }
 
 data class User(
-        override val id: String = "",
+        override var id: String = "",
         override val username: String = "",
         override val email: String = "",
-        val displayName: String = "",
         override val password: String = "",
-):DemoIndentity{
+        override val phone_number : String = "",
+        override val role: Role = Role.USER,
+
+        ):DemoIndentity{
     companion object{
-        val currentUser : User = User()
+        var currentUser : User = User()
         fun newUser(userReq: UserReq): User {
             val id = utils.newUUID()
             return User(
@@ -26,8 +33,20 @@ data class User(
                     username = userReq.username,
                     email = userReq.email,
                     password = userReq.password,
+                    phone_number = userReq.phone_number,
+                    role = Role.USER
             )
         }
+
+    }
+    fun update(userReq: UserReq): User {
+        return User(
+                this.id,
+                userReq.username,
+                userReq.email,
+                userReq.password,
+                userReq.phone_number
+        )
     }
 }
 
@@ -110,4 +129,48 @@ data class OrderStatus(
 data class UserDemo(
     val name : String,
     val age : Int
+)
+
+enum class Role(emptySet: MutableSet<Permission>) {
+    USER(Collections.emptySet()),
+    MANAGER(
+            setOf(
+                    Permission.ACCOUNT_USER,
+                    Permission.ACCOUNT_STAFF,
+                    Permission.ACCOUNT_MANAGE,
+                    Permission.ACCOUNT_WAREHOUSE_STAFF,
+                    Permission.ACCOUNT_WAREHOUSE_STAFF,
+                    Permission.ACCOUNT_WAREHOUSE_STAFF_MANAGE,
+                    Permission.ACCOUNT_BOSS
+            ).toMutableSet()
+    );
+
+    private val permissions: Set<Permission> = setOf()
+    val authorities: List<SimpleGrantedAuthority>
+        get() {
+            val authorities = permissions
+                    .stream()
+                    .map { permission -> SimpleGrantedAuthority(permission.permission) }
+                    .collect(Collectors.toList())
+            authorities.add(SimpleGrantedAuthority("ROLE_$name"))
+            return authorities
+
+        }
+}
+
+enum class Permission(val permission: String) {
+    ACCOUNT_USER("account:user"),
+    ACCOUNT_STAFF("account:staff"),
+    ACCOUNT_MANAGE("account:manage"),
+    ACCOUNT_WAREHOUSE_STAFF("account:warehouse_staff"),
+    ACCOUNT_WAREHOUSE_STAFF_MANAGE("account:warehouse_staff_manage"),
+    ACCOUNT_BOSS("account:boss");
+}
+
+data class Token(
+        val id: String,
+        val token: String,
+        var revoked: Boolean = false,
+        var expired: Boolean = false,
+        val userId: String
 )

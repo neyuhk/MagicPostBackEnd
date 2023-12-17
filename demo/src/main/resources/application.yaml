@@ -2,6 +2,9 @@ data:
   mongodb:
     database: blt_web
     uri: mongodb://root:password@35.198.240.131:27017/admin
+    table:
+      user: user
+      order: order
 
 spring:
   data:
@@ -9,6 +12,22 @@ spring:
       auto-index-creation: true
       database: btl_web
       uri: mongodb://root:password@35.198.240.131:27017/admin
-#      table:
-#        user : user
-#        order : order
+
+
+application:
+  security:
+    jwt:
+      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days
+
+logging:
+  level:
+    org.springframework.security: TRACE
+
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha

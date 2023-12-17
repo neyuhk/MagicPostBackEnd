@@ -1,4 +1,4 @@
-package com.example.demo.util.utils
+package com.example.demo.util
 import com.fasterxml.uuid.Generators
 
 class utils {
