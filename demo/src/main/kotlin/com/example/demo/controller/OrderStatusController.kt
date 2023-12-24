@@ -42,11 +42,10 @@ class OrderStatusController(
         return orderStatusServiceImpl.listStatus()
     }
 
-    @PutMapping("/{id}", MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PutMapping(MediaType.MULTIPART_FORM_DATA_VALUE)
     fun updateOrderStatus(
-        @ModelAttribute serviceAddressReq: ServiceAddressReq,
-        @PathVariable id: String
+        @ModelAttribute id : String ,serviceAddressId: String,
     ) : OrderStatusResp {
-        return orderStatusServiceImpl.updateStatus(id, serviceAddressReq)
+        return orderStatusServiceImpl.updateStatus(id, serviceAddressId)
     }
 }

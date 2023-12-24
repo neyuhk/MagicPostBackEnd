@@ -39,9 +39,9 @@ data class UpcomingResp(
         val serviceAddressId : String,
         val orderId : String
 ){
-    constructor(serviceAddressId: String, order: Order) : this (
-            serviceAddressId,
-            order.id
+    constructor(upcoming: Upcoming) : this (
+            upcoming.serviceAddressId,
+            upcoming.orderId
     )
 }
 
@@ -49,9 +49,9 @@ data class OrderHereResp(
         val serviceAddressId : String,
         val orderId : String
 ){
-    constructor(serviceAddressId: String, order: Order) : this (
-            serviceAddressId,
-            order.id
+    constructor(orderHere: OrderHere) : this (
+            orderHere.serviceAddressId,
+            orderHere.orderId
     )
 }
 
@@ -59,9 +59,9 @@ data class MovingResp(
         val serviceAddressId : String,
         val orderId : String
 ){
-    constructor(serviceAddressId: String, order: Order) : this (
-            serviceAddressId,
-            order.id
+    constructor(moving: Moving) : this (
+            moving.serviceAddressId,
+            moving.orderId
     )
 }
 
