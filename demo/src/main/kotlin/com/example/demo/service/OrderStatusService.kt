@@ -8,6 +8,7 @@ interface OrderStatusService {
     fun updateOrderStatus(orderStatusResp: OrderStatusResp): OrderResp
     fun updateStatus(id: String, serviceAddressId: String) : OrderStatusResp
     fun getOrderStatusById(orderId : String) : OrderStatusResp
+    fun getOrderStatus(orderId : String) : OrderStatus
     fun listStatus() : List<OrderStatusResp>
     fun listStatusById(orderId: String) : List<OrderStatusResp>
 }

@@ -122,7 +122,7 @@ data class OrderStatus(
     val orderId : String,
 //    val positionId : String,
     val address : String,
-    val statusNum : Int,
+    val statusNum : Int?,
     val status : String,
     val date : LocalDate
 ){
@@ -131,7 +131,7 @@ data class OrderStatus(
 //        serviceAddressReq.id,
         orderId,
         orderReq.address,
-        2,
+        1,
         "Đơn hàng đang được chuẩn bị",
         LocalDate.now()
     )
@@ -146,18 +146,18 @@ data class OrderStatus(
 //    }
 
     private fun setStatuscoming(address: String) : String{
-        return "Đang giao tới" + address
+        return "Đang giao tới " + address
     }
 
     private fun setStatusHere(address: String) : String{
-        return "Đang ở" + address
+        return "Đang ở " + address
     }
 
     private fun setStatusMoving(address: String) : String{
-        return "Đang giao tới" + address
+        return "Đang giao tới " + address
     }
 
-    private fun setStatus(statusNum: Int, address: String, position: String): String {
+    private fun setStatus(statusNum: Int?, address: String, position: String): String {
         if(position == address) {
             return "Đơn hàng đang được giao đến tay bạn"
         }
@@ -170,16 +170,16 @@ data class OrderStatus(
         return "error"
     }
 
-    private fun setStatusNum(statusNum: Int) : Int{
-        if (statusNum == 1){
-            return 2
+    private fun setStatusNum(statusNum: Int?) : Int{
+        return if (statusNum == 1){
+            2
         }
 //        else if(statusNum == 2){
 //            return 3
 //        }
 //        else return 1
         else
-            return 1
+            1
     }
 
     fun update(serviceAddress: ServiceAddress) : OrderStatus {
@@ -187,8 +187,9 @@ data class OrderStatus(
         return this.copy(
                 orderId = this.orderId,
 //                positionId = serviceAddressReq.id,
+                address = this.address,
                 statusNum = setStatusNum(this.statusNum),
-                status = setStatus(this.statusNum, this.address, serviceAddress.name),
+                status = setStatus(statusNum, this.address, serviceAddress.name),
 //                status = setStatus(this.address, serviceAddressReq.name),
                 date = today
         )

@@ -22,7 +22,7 @@ class ServiceAddressRepoImpl(
     override fun getServiceAddressById(id: String) : ServiceAddress {
         return mongoTemplate.findById(id, ServiceAddress::class.java) ?:throw ResponseStatusException(
                 HttpStatus.NOT_FOUND,
-                "Cannot find any event with id $id"
+                "Cannot find any serviceAddress by id"
         )
     }
 }

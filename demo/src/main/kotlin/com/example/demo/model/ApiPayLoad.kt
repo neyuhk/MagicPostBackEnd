@@ -118,13 +118,22 @@ data class OrderStatusReq(
 data class OrderStatusResp(
     val oderId : String,
 //    val positionId : String,
+    val statusNum : Int,
     val status : String,
     val date : LocalDate
 ){
     constructor(orderStatus: OrderStatus) : this(
             orderStatus.orderId,
 //            orderStatus.positionId,
+            orderStatus.statusNum!!,
             orderStatus.status,
             orderStatus.date
     )
 }
+data class UpdateReq(
+        val orderId: String,
+        val serviceAddressId: String
+)
+data class IdReq(
+        val id : String
+)

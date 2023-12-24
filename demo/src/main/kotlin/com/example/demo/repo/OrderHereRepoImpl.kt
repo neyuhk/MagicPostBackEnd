@@ -28,10 +28,15 @@ class OrderHereRepoImpl(
     }
 
     override fun findIdHere(orderId: String): String {
-        val query = Query()
-        query.addCriteria(Criteria.where("orderId").isEqualTo(orderId))
-        return mongoTemplate.findById(query, OrderHere::class.java)?.serviceAddressId
-                ?: throw ResponseStatusException(
+//        val query = Query()
+//        query.addCriteria(Criteria.where("orderId").isEqualTo(orderId))
+//        return mongoTemplate.findById(query, OrderHere::class.java)?.serviceAddressId
+        val listHere = mongoTemplate.findAll(OrderHere::class.java)
+                for(orderHere in listHere){
+                    if(orderHere.orderId == orderId)
+                        return orderHere.serviceAddressId
+                }
+        throw ResponseStatusException(
                 HttpStatus.NOT_FOUND,
                 "Cannot find any orderHere"
         )

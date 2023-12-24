@@ -3,12 +3,12 @@ package com.example.demo.service
 import com.example.demo.model.*
 import com.example.demo.repo.OrderRepoImpl
 import com.example.demo.repo.OrderStatusRepoImpl
+import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-@Suppress("SpringJavaInjectionPointsAutowiringInspection")
-@RestController
-@RequestMapping("api/v1/order")
+@Service
+//@RequestMapping("api/v1/order")
 class OrderServiceImpl(
     val orderRepoImpl: OrderRepoImpl,
     val orderStatusRepoImpl: OrderStatusRepoImpl,

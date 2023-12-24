@@ -26,7 +26,7 @@ class OrderRepoImpl(
     override fun orderById(id: String): Order {
         return mongoTemplate.findById(id, Order::class.java) ?:throw ResponseStatusException(
                 HttpStatus.NOT_FOUND,
-                "Cannot find any event with id $id"
+                "Cannot find any order by id"
         )
     }
 
@@ -42,7 +42,7 @@ class OrderRepoImpl(
 //    }
     override fun updateStatus(orderStatusResp: OrderStatusResp): Order {
         return transactionTemplate.execute { _ ->
-            val oder = orderById(orderStatusResp.oderId)
+            val oder : Order = orderById(orderStatusResp.oderId)
             val updatedOrderStatus = oder.updateStatus(orderStatusResp)
             return@execute mongoTemplate.save(updatedOrderStatus)
         } ?: throw ResponseStatusException(

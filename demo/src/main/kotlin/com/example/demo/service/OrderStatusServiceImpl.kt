@@ -3,12 +3,11 @@ package com.example.demo.service
 import com.example.demo.model.*
 import com.example.demo.repo.OrderRepoImpl
 import com.example.demo.repo.OrderStatusRepoImpl
+import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-@Suppress("SpringJavaInjectionPointsAutowiringInspection")
-@RestController
-@RequestMapping("api/v1/status")
+@Service
 class OrderStatusServiceImpl(
         val orderStatusRepoImpl: OrderStatusRepoImpl,
         val orderRepoImpl: OrderRepoImpl
@@ -35,6 +34,10 @@ class OrderStatusServiceImpl(
 //    }
     override fun getOrderStatusById(orderId: String): OrderStatusResp {
         return OrderStatusResp(orderStatusRepoImpl.getStatusById(orderId))
+    }
+
+    override fun getOrderStatus(orderId: String): OrderStatus {
+        return orderStatusRepoImpl.getStatusById(orderId)
     }
 
     override fun listStatus(): List<OrderStatusResp> {

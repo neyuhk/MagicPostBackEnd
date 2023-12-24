@@ -1,6 +1,7 @@
 package com.example.demo.repo
 
 import com.example.demo.model.OrderStatus
+import com.example.demo.model.OrderStatusResp
 
 interface OrderStatusRepo {
     fun addOrderStatus(orderStatus: OrderStatus) : OrderStatus

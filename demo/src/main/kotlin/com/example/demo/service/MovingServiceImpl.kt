@@ -5,12 +5,12 @@ import com.example.demo.model.MovingResp
 import com.example.demo.model.Order
 import com.example.demo.model.UpcomingResp
 import com.example.demo.repo.MovingRepo
+import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-@Suppress("SpringJavaInjectionPointsAutowiringInspection")
-@RestController
-@RequestMapping("api/v1/manager")
+@Service
+//@RequestMapping("api/v1/manager")
 class MovingServiceImpl(
         val movingRepo : MovingRepo
 ) : MovingService {

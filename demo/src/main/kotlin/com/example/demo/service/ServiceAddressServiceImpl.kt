@@ -5,12 +5,12 @@ import com.example.demo.model.ServiceAddress
 import com.example.demo.model.ServiceAddressReq
 import com.example.demo.model.ServiceAddressResp
 import com.example.demo.repo.ServiceAddressRepoImpl
+import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-@Suppress("SpringJavaInjectionPointsAutowiringInspection")
-@RestController
-@RequestMapping("api/v1/serviceAddress")
+@Service
+//@RequestMapping("api/v1/serviceAddress")
 class ServiceAddressServiceImpl(
         val serviceAddressRepo : ServiceAddressRepoImpl
 ) : ServiceAddressService {

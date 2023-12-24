@@ -28,8 +28,8 @@ class UpcomingRepoImpl(
     }
 
     override fun ListComing(addressId: String): List<Upcoming> {
-        val query = Query()
-        query.addCriteria(Criteria.where("serviceAddressId").isEqualTo(addressId))
+//        val query = Query()
+//        query.addCriteria(Criteria.where("serviceAddressId").isEqualTo(addressId))
         val listComing = mongoTemplate.findAll(Upcoming::class.java)
         val listComingById : MutableList<Upcoming> = mutableListOf()
         for(serviceAddress in listComing){
@@ -37,6 +37,7 @@ class UpcomingRepoImpl(
                 listComingById.add(serviceAddress)
             }
         }
+        println(addressId)
         return listComingById
     }
 }
