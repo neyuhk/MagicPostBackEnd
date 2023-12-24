@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @Suppress("SpringJavaInjectionPointsAutowiringInspection")
 @RestController
-@RequestMapping("api/v1/manager")
+//@RequestMapping("api/v1/manager")
 class ManagerController(
         val upcomingServiceImpl: UpcomingServiceImpl,
         val orderHereServiceImpl: OrderHereServiceImpl,
