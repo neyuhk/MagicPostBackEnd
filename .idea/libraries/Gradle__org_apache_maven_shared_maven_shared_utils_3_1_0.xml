@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.maven.shared:maven-shared-utils:3.1.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.apache.maven.shared" artifactId="maven-shared-utils" version="3.1.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven.shared/maven-shared-utils/3.1.0/78d8798fe84d5e095577221d299e9a3c8e696bca/maven-shared-utils-3.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

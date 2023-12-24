@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.cloud.tools:appengine-maven-plugin:2.4.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.google.cloud.tools" artifactId="appengine-maven-plugin" version="2.4.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.cloud.tools/appengine-maven-plugin/2.4.1/8e9e5fa572830fb0f4fb5074c3ec37f1070d2044/appengine-maven-plugin-2.4.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

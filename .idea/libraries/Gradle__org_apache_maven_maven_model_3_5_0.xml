@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.maven:maven-model:3.5.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.apache.maven" artifactId="maven-model" version="3.5.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-model/3.5.0/9a190a111f2751941a22a3efeea954d09931ad4e/maven-model-3.5.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
