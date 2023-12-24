@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-//@RequestMapping("api/v1/order")
+@RequestMapping("api/v1/order")
 class OrderController(val orderServiceImpl: OrderServiceImpl) {
-    @PostMapping("order", MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping( MediaType.MULTIPART_FORM_DATA_VALUE)
     fun createOrder(@ModelAttribute orderReq : OrderReq):OrderResp{
         return orderServiceImpl.addOrder(orderReq)
     }
 
-    @GetMapping("order")
+    @GetMapping()
     fun listOrder() : List<OrderResp> {
         return orderServiceImpl.listOrder()
     }

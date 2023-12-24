@@ -6,11 +6,13 @@ data class UserResp(
         val id: String = "",
         val username: String = "",
         val email: String = "",
+        val phone_number: String
 ){
     constructor(user: User):this(
         id = user.id,
         username = user.username,
-        email = user.email
+        email = user.email,
+        phone_number = user.phone_number
     )
 }
 
@@ -32,6 +34,36 @@ data class LoginResp(
     val accessKey: String,
     val refreshKey: String,
 )
+
+data class UpcomingResp(
+        val serviceAddressId : String,
+        val orderId : String
+){
+    constructor(serviceAddressId: String, order: Order) : this (
+            serviceAddressId,
+            order.id
+    )
+}
+
+data class OrderHereResp(
+        val serviceAddressId : String,
+        val orderId : String
+){
+    constructor(serviceAddressId: String, order: Order) : this (
+            serviceAddressId,
+            order.id
+    )
+}
+
+data class MovingResp(
+        val serviceAddressId : String,
+        val orderId : String
+){
+    constructor(serviceAddressId: String, order: Order) : this (
+            serviceAddressId,
+            order.id
+    )
+}
 
 data class ServiceAddressReq(
 //    val id : String,

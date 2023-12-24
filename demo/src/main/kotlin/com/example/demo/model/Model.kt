@@ -78,10 +78,38 @@ data class Order(
     }
 }
 
+data class Upcoming(
+        val serviceAddressId : String,
+        val orderId : String
+){
+    constructor(serviceId : String, order: Order): this(
+            serviceId,
+            order.id
+    )
+}
+data class OrderHere(
+        val serviceAddressId : String,
+        val orderId : String
+){
+    constructor(serviceId : String, order: Order): this(
+            serviceId,
+            order.id
+    )
+}
+data class Moving(
+        val serviceAddressId : String,
+        val orderId : String
+){
+    constructor(serviceId : String, order: Order): this(
+            serviceId,
+            order.id
+    )
+}
 data class ServiceAddress(
     val id : String,
     val name : String,
-    val address: String,
+    val address: String
+
 ){
     constructor(serviceAddressReq: ServiceAddressReq) : this(
         utils.newUUID(),
@@ -94,6 +122,7 @@ data class OrderStatus(
     val orderId : String,
 //    val positionId : String,
     val address : String,
+    val statusNum : Int,
     val status : String,
     val date : LocalDate
 ){
@@ -102,17 +131,53 @@ data class OrderStatus(
 //        serviceAddressReq.id,
         orderId,
         orderReq.address,
+        2,
         "Đơn hàng đang được chuẩn bị",
         LocalDate.now()
     )
 
-    private fun setStatus(address: String, position: String): String {
+//    private fun setStatus(address: String, position: String): String {
+//        if(position == address) {
+//            return "Đơn hàng đang được giao đến tay bạn"
+//        }
+//        else {
+//            return "Đã đến " + position
+//        }
+//    }
+
+    private fun setStatuscoming(address: String) : String{
+        return "Đang giao tới" + address
+    }
+
+    private fun setStatusHere(address: String) : String{
+        return "Đang ở" + address
+    }
+
+    private fun setStatusMoving(address: String) : String{
+        return "Đang giao tới" + address
+    }
+
+    private fun setStatus(statusNum: Int, address: String, position: String): String {
         if(position == address) {
             return "Đơn hàng đang được giao đến tay bạn"
         }
-        else {
-            return "Đã đến " + position
+        if(statusNum == 1)
+            return setStatusHere(position)
+        if(statusNum == 2)
+            return setStatusMoving(position)
+        if(statusNum == 3)
+            return setStatuscoming(position)
+        return "error"
+    }
+
+    private fun setStatusNum(statusNum: Int) : Int{
+        if (statusNum == 1){
+            return 2
         }
+        else if(statusNum == 2){
+            return 3
+        }
+        else return 1
     }
 
     fun update(serviceAddressReq: ServiceAddressReq) : OrderStatus {
@@ -120,7 +185,9 @@ data class OrderStatus(
         return this.copy(
                 orderId = this.orderId,
 //                positionId = serviceAddressReq.id,
-                status = setStatus(this.address, serviceAddressReq.name),
+                statusNum = setStatusNum(this.statusNum),
+                status = setStatus(this.statusNum, this.address, serviceAddressReq.name),
+//                status = setStatus(this.address, serviceAddressReq.name),
                 date = today
         )
     }
