@@ -26,11 +26,11 @@ class MovingRepoImpl(
         mongoTemplate.findAndRemove(query, Moving::class.java)
     }
 
-    override fun ListMove(addressId: String): List<Moving> {
+    override fun ListMove(addressId: String): MutableList<Moving> {
         val query = Query()
         query.addCriteria(Criteria.where("serviceAddressId").isEqualTo(addressId))
         val listMove = mongoTemplate.findAll(Moving::class.java)
-        val listMoveById : MutableList<Moving> = mutableListOf()
+        var listMoveById : MutableList<Moving> = mutableListOf()
         for(serviceAddress in listMove){
             if(serviceAddress.serviceAddressId == addressId) {
                 listMoveById.add(serviceAddress)

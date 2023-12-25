@@ -135,5 +135,5 @@ data class UpdateReq(
         val serviceAddressId: String
 )
 data class IdReq(
-        val id : String
+        val serviceAddressId: String
 )

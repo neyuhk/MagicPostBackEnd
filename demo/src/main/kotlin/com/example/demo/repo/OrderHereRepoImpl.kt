@@ -46,16 +46,16 @@ class OrderHereRepoImpl(
         TODO("Not yet implemented")
     }
 
-    override fun ListHere(addressId: String): List<OrderHere> {
-        val query = Query()
-        query.addCriteria(Criteria.where("serviceAddressId").isEqualTo(addressId))
+    override fun ListHere(addressId: String): MutableList<OrderHere> {
         val listHere = mongoTemplate.findAll(OrderHere::class.java)
-        val listHereById : MutableList<OrderHere> = mutableListOf()
+        var listHereById : MutableList<OrderHere> = mutableListOf()
         for(serviceAddress in listHere){
             if(serviceAddress.serviceAddressId == addressId) {
                 listHereById.add(serviceAddress)
             }
         }
+        println(listHere)
+        println(listHereById)
         return listHereById
     }
 

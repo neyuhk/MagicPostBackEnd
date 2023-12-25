@@ -17,21 +17,29 @@ class ManagerController(
         val orderStatusServiceImpl: OrderStatusServiceImpl
 ) {
     @GetMapping("coming", MediaType.MULTIPART_FORM_DATA_VALUE)
-    fun listComing(@ModelAttribute idReq: IdReq) : List<UpcomingResp> {
-        return upcomingServiceImpl.listComing(idReq.id)
+    fun listComing(@ModelAttribute idReq: IdReq) : MutableList<OrderStatusResp> {
+        val listComing = upcomingServiceImpl.listComing(idReq.serviceAddressId)
+        var listOrder : MutableList<OrderStatusResp> = mutableListOf()
+        for(order in listComing)
+            listOrder.add(orderStatusServiceImpl.getOrderStatusById(order.orderId))
+        return listOrder
     }
 
     @GetMapping("here", MediaType.MULTIPART_FORM_DATA_VALUE)
-    fun listHere(@ModelAttribute idReq: IdReq) : List<OrderStatusResp> {
-        val listOrderHere = orderHereServiceImpl.listHere(idReq.id)
-        val listOrder : MutableList<OrderStatusResp> = mutableListOf()
+    fun listHere(@ModelAttribute idReq: IdReq) : MutableList<OrderStatusResp> {
+        val listOrderHere = orderHereServiceImpl.listHere(idReq.serviceAddressId)
+        var listOrder : MutableList<OrderStatusResp> = mutableListOf()
         for(order in listOrderHere)
             listOrder.add(orderStatusServiceImpl.getOrderStatusById(order.orderId))
         return listOrder
     }
 
     @GetMapping("moving", MediaType.MULTIPART_FORM_DATA_VALUE)
-    fun listMoving(@ModelAttribute idReq: IdReq) : List<MovingResp> {
-        return movingServiceImpl.listMove(idReq.id)
+    fun listMoving(@ModelAttribute idReq: IdReq) : MutableList<OrderStatusResp> {
+        val listMoving = movingServiceImpl.listMove(idReq.serviceAddressId)
+        var listOrder : MutableList<OrderStatusResp> = mutableListOf()
+        for(order in listMoving)
+            listOrder.add(orderStatusServiceImpl.getOrderStatusById(order.orderId))
+        return listOrder
     }
 }

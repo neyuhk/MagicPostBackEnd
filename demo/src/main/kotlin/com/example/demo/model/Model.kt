@@ -131,7 +131,7 @@ data class OrderStatus(
 //        serviceAddressReq.id,
         orderId,
         orderReq.address,
-        1,
+        0,
         "Đơn hàng đang được chuẩn bị",
         LocalDate.now()
     )
@@ -163,10 +163,10 @@ data class OrderStatus(
         }
         if(statusNum == 1)
             return setStatusHere(position)
-//        if(statusNum == 2)
-//            return setStatusMoving(position)
         if(statusNum == 2)
-            return setStatuscoming(position)
+            return setStatusMoving(position)
+//        if(statusNum == 3)
+//            return setStatuscoming(position)
         return "error"
     }
 
@@ -174,21 +174,21 @@ data class OrderStatus(
         return if (statusNum == 1){
             2
         }
-//        else if(statusNum == 2){
-//            return 3
+//        else
+//            if(statusNum == 2){
+//            3
 //        }
-//        else return 1
-        else
-            1
+        else 1
     }
 
     fun update(serviceAddress: ServiceAddress) : OrderStatus {
         val today = LocalDate.now()
+        val statusNum = setStatusNum((this.statusNum))
         return this.copy(
                 orderId = this.orderId,
 //                positionId = serviceAddressReq.id,
                 address = this.address,
-                statusNum = setStatusNum(this.statusNum),
+                statusNum = statusNum,
                 status = setStatus(statusNum, this.address, serviceAddress.name),
 //                status = setStatus(this.address, serviceAddressReq.name),
                 date = today

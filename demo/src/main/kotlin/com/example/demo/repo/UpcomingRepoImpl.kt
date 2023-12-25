@@ -27,11 +27,11 @@ class UpcomingRepoImpl(
         mongoTemplate.findAndRemove(query, Upcoming::class.java)
     }
 
-    override fun ListComing(addressId: String): List<Upcoming> {
+    override fun ListComing(addressId: String): MutableList<Upcoming> {
 //        val query = Query()
 //        query.addCriteria(Criteria.where("serviceAddressId").isEqualTo(addressId))
         val listComing = mongoTemplate.findAll(Upcoming::class.java)
-        val listComingById : MutableList<Upcoming> = mutableListOf()
+        var listComingById : MutableList<Upcoming> = mutableListOf()
         for(serviceAddress in listComing){
             if(serviceAddress.serviceAddressId == addressId) {
                 listComingById.add(serviceAddress)

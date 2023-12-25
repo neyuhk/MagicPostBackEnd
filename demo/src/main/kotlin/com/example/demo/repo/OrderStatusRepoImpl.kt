@@ -40,18 +40,22 @@ class OrderStatusRepoImpl(
             println(updatedStatus)
             val newOrder = orderRepo.orderById(orderId)
 
-            if(updatedStatus.statusNum == 2) {
+            if(updatedStatus.statusNum == 1) {
                 upcomingRepoImpl.deleteUpcoming(orderId)
                 movingRepoImpl.deleteMove(orderId)
                 orderHereRepoImpl.createOrderHere(OrderHere(serviceAddressId, newOrder))
             }
-            if(updatedStatus.statusNum == 1) {
-                val serviceAddressIdAfter = orderHereRepoImpl.findIdHere(orderId)
-                println("ok " + serviceAddressIdAfter)
+
+            if(updatedStatus.statusNum == 2) {
+                val serviceAddressIdBefore = orderHereRepoImpl.findIdHere(orderId)
+
+                println("orderId " + orderId)
                 upcomingRepoImpl.createUpcoming(Upcoming(serviceAddressId, newOrder))
-                movingRepoImpl.createMoving(Moving(serviceAddressIdAfter, newOrder))
+                movingRepoImpl.createMoving(Moving(serviceAddressIdBefore, newOrder))
                 orderHereRepoImpl.deleteHere(orderId)
             }
+
+
 
             return@execute mongoTemplate.save(updatedStatus)
         } ?: throw ResponseStatusException(
@@ -64,8 +68,10 @@ class OrderStatusRepoImpl(
 //        val query = Query()
 //        query.addCriteria(Criteria.where("orderId").isEqualTo(orderId))
 //        val listStatus = mongoTemplate.find(query, OrderStatus::class.java)
-        val listStatus = mongoTemplate.findAll(OrderStatus::class.java)
-//        var index = listStatus.size - 1
+//        val listStatus = mongoTemplate.findAll(OrderStatus::class.java)
+        val listStatus = getListStatusById(orderId)
+        var index = listStatus.size - 1
+        return listStatus[index]
 //        while (index >= 0){
 //            val orderStatus = listStatus[index]
 //            if(orderStatus.orderId == orderId){
@@ -74,15 +80,15 @@ class OrderStatusRepoImpl(
 //            }
 //            index = index - 1
 //        }
-        for(orderStatus in listStatus){
-            println("order id " + orderStatus.orderId)
-            println(orderId)
-            if(orderStatus.orderId == orderId){
-                println("id " + orderId + " true")
-                return orderStatus
-            }
-        }
-                throw ResponseStatusException(
+//        for(orderStatus in listStatus){
+//            println("order id " + orderStatus.orderId)
+//            println(orderId)
+//            if(orderStatus.orderId == orderId){
+//                println("id " + orderId + " true")
+//                return orderStatus
+//            }
+//        }
+                ?: throw ResponseStatusException(
                 HttpStatus.NOT_FOUND,
                 "Cannot find any status with order id"
         )
