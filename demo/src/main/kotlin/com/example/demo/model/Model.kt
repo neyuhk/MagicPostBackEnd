@@ -52,6 +52,7 @@ data class User(
 
 data class Order(
     val id : String,
+    val name : String,
     val address : String,
     val weight : Int,
     val quantity : Int,
@@ -60,6 +61,7 @@ data class Order(
 ){
     constructor(oderReq : OrderReq):this(
         utils.newUUID(),
+        oderReq.name,
         oderReq.address,
         oderReq.weight,
         oderReq.quantity,
@@ -69,6 +71,7 @@ data class Order(
     fun updateStatus(orderStatusResp: OrderStatusResp) : Order{
         return this.copy(
                 this.id,
+                this.name,
                 this.address,
                 this.weight,
                 this.quantity,

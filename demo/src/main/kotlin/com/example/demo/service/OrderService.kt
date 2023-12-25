@@ -11,5 +11,6 @@ interface OrderService {
     fun listOrder() : List<OrderResp>
     fun getOrder(id : String) : OrderResp
     fun getOrderStatus(orderId : String) : OrderStatusResp
+    fun deleteOrder(orderId: String)
 //    fun updateOrderStatus(orderStatusResp: OrderStatusResp) : OrderResp
 }

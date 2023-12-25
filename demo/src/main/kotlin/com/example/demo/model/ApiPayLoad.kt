@@ -85,6 +85,7 @@ data class ServiceAddressResp(
 
 data class OrderReq(
 //    val orderId : String,
+    val name : String,
     val address : String,
     val weight : Int,
     val quantity : Int,
@@ -93,6 +94,7 @@ data class OrderReq(
 
 data class OrderResp(
         val id: String,
+        val name : String,
         val address : String,
         val weight : Int,
         val quantity : Int,
@@ -101,6 +103,7 @@ data class OrderResp(
 ){
     constructor(oder : Order): this(
         oder.id,
+        oder.name,
         oder.address,
         oder.weight,
         oder.quantity,

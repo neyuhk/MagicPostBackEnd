@@ -40,6 +40,9 @@ class OrderServiceImpl(
         return orderStatusServiceImpl.getOrderStatusById(orderId)
     }
 
+    override fun deleteOrder(orderId: String) {
+        orderRepoImpl.deleteOrder(orderId)
+    }
 
 
 //    override fun updateOrderStatus(orderStatusResp: OrderStatusResp): OrderResp {

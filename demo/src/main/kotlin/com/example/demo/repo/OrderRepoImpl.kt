@@ -1,9 +1,13 @@
 package com.example.demo.repo
 
+import com.example.demo.model.Moving
 import com.example.demo.model.OrderStatusReq
 import com.example.demo.model.Order
 import com.example.demo.model.OrderStatusResp
 import org.springframework.data.mongodb.core.MongoTemplate
+import org.springframework.data.mongodb.core.query.Criteria
+import org.springframework.data.mongodb.core.query.Query
+import org.springframework.data.mongodb.core.query.isEqualTo
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
 import org.springframework.transaction.support.TransactionTemplate
@@ -49,6 +53,12 @@ class OrderRepoImpl(
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 "Cannot update order status now"
         )
+    }
+
+    override fun deleteOrder(orderId: String) {
+        val query = Query()
+        query.addCriteria(Criteria.where("id").isEqualTo(orderId))
+        mongoTemplate.findAndRemove(query, Order::class.java)
     }
 
 //    override fun updateStatus(orderStatusReq: OrderStatusReq): Order {
