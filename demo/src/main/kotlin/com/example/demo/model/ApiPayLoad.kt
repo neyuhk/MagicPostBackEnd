@@ -4,12 +4,14 @@ import java.time.LocalDate
 
 data class UserResp(
         val id: String = "",
+        val codeid: String = "",
         val username: String = "",
         val email: String = "",
         val phone_number: String
 ){
     constructor(user: User):this(
         id = user.id,
+        codeid = user.codeid,
         username = user.username,
         email = user.email,
         phone_number = user.phone_number
@@ -17,6 +19,7 @@ data class UserResp(
 }
 
 data class UserReq(
+        val codeid : String,
         val username: String,
         val email: String,
         var password: String,
