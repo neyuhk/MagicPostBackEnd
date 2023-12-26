@@ -13,9 +13,18 @@ import reactor.core.publisher.Mono
 @RestController
 @RequestMapping("api/v1/user")
 class UserController(val userService: UserServiceImpl) {
-    @PostMapping("/register")
-    fun createUser(@RequestBody userReq: UserReq): Mono<UserResp> {
-        return userService.createUser(userReq)
+    @PostMapping("/register/{serviceAddressId}")
+    fun createManager(
+            @PathVariable serviceAddressId : String,
+            @RequestBody userReq: UserReq): Mono<UserResp> {
+        return userService.createManager(userReq, serviceAddressId)
+    }
+
+    @PostMapping("/register/employee/{serviceAddressId}")
+    fun createEmployee(
+            @PathVariable serviceAddressId : String,
+            @RequestBody userReq: UserReq): Mono<UserResp> {
+        return userService.createEmployee(userReq, serviceAddressId)
     }
 
     @PostMapping("/login")

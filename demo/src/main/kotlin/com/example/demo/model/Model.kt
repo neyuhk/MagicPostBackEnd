@@ -9,6 +9,7 @@ import java.util.stream.Collectors
 interface DemoIndentity{
     val id : String
     val codeid : String
+    val serviceAddressid : String
     val username : String
     val email : String
     val password : String
@@ -19,6 +20,7 @@ interface DemoIndentity{
 data class User(
         override var id: String = "",
         override var codeid : String = "",
+        override val serviceAddressid: String = "",
         override val username: String = "",
         override val email: String = "",
         override val password: String = "",
@@ -28,11 +30,12 @@ data class User(
         ):DemoIndentity{
     companion object{
         var currentUser : User = User()
-        fun newUser(userReq: UserReq): User {
+        fun newUser(userReq: UserReq, serviceAddressId: String): User {
             val id = utils.newUUID()
             return User(
                     id,
                     codeid = userReq.codeid,
+                    serviceAddressid = serviceAddressId,
                     username = userReq.username,
                     email = userReq.email,
                     password = userReq.password,
@@ -45,6 +48,8 @@ data class User(
     fun update(userReq: UserReq): User {
         return User(
                 this.id,
+                this.codeid,
+                this.serviceAddressid,
                 userReq.username,
                 userReq.email,
                 userReq.password,

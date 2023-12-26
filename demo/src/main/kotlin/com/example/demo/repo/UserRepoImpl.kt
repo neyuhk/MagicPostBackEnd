@@ -19,8 +19,25 @@ class UserRepoImpl(
         val transactionTemplate: TransactionTemplate,
         @Value("\${data.mongodb.table.user}") val userCol: String
 ):UserRepo {
-    override fun addUser(userReq: UserReq): User {
-        val newUser = User.newUser(userReq)
+    override fun addManager(userReq: UserReq, serviceAddressId : String): User {
+        val newUser = User.newUser(userReq, serviceAddressId)
+        return transactionTemplate.execute { _ ->
+            try {
+                mongoTemplate.insert(newUser, userCol)
+            } catch (e: DuplicateKeyException) {
+                throw ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "User information is already exist"
+                )
+            }
+            return@execute newUser
+        }!!
+    }
+
+    override fun addEmployee(userReq: UserReq, serviceAddressId: String): User {
+        var newUserReq : UserReq = userReq
+        newUserReq.codeid = "NV" + countUserByServiceAddressId(serviceAddressId)
+        val newUser = User.newUser(userReq, serviceAddressId)
         return transactionTemplate.execute { _ ->
             try {
                 mongoTemplate.insert(newUser, userCol)
@@ -78,5 +95,17 @@ class UserRepoImpl(
 
     override fun findUserByUsernameStartWith(username: String): List<User> {
         TODO("Not yet implemented")
+    }
+
+    override fun countUserByServiceAddressId(serviceAddressId: String): String {
+        var count = 0
+        val listUser = mongoTemplate.findAll(User::class.java)
+        for(user in listUser){
+            if(user.serviceAddressid == serviceAddressId)
+                count ++
+        }
+        return if(count <= 9)
+                    "0" + count.toString()
+            else count.toString()
     }
 }

@@ -8,7 +8,6 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 import reactor.core.publisher.Mono
@@ -20,9 +19,15 @@ class UserServiceImpl(
         val jwtProvider: JwtProvider,
         val passwordEncoder: PasswordEncoder,
 ) : UserService {
-    override fun createUser(userReq: UserReq): Mono<UserResp> {
+    override fun createManager(userReq: UserReq, serviceAddressId : String): Mono<UserResp> {
         userReq.password = passwordEncoder.encode(userReq.password)
-        val user = userRepo.addUser(userReq)
+        val user = userRepo.addManager(userReq, serviceAddressId)
+        return Mono.just(UserResp(user))
+    }
+
+    override fun createEmployee(userReq: UserReq, serviceAddressId : String): Mono<UserResp> {
+        userReq.password = passwordEncoder.encode(userReq.password)
+        val user = userRepo.addEmployee(userReq, serviceAddressId)
         return Mono.just(UserResp(user))
     }
 

@@ -5,6 +5,7 @@ import java.time.LocalDate
 data class UserResp(
         val id: String = "",
         val codeid: String = "",
+        val serviceAddressid: String = "",
         val username: String = "",
         val email: String = "",
         val phone_number: String
@@ -12,6 +13,7 @@ data class UserResp(
     constructor(user: User):this(
         id = user.id,
         codeid = user.codeid,
+        serviceAddressid = user.serviceAddressid,
         username = user.username,
         email = user.email,
         phone_number = user.phone_number
@@ -19,7 +21,7 @@ data class UserResp(
 }
 
 data class UserReq(
-        val codeid : String,
+        var codeid : String,
         val username: String,
         val email: String,
         var password: String,
