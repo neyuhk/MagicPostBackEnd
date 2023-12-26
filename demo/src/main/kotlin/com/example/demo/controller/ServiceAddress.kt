@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("api/v1/serviceAddress")
 class ServiceAddress(val serviceAddressServiceImpl: ServiceAddressServiceImpl) {
-    @PostMapping( MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping( "",MediaType.MULTIPART_FORM_DATA_VALUE)
     fun createServiceAddress(@ModelAttribute serviceAddressReq: ServiceAddressReq): ServiceAddressResp {
         return serviceAddressServiceImpl.addServiceAddress(serviceAddressReq)
     }

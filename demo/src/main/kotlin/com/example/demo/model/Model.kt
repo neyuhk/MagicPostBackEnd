@@ -115,7 +115,8 @@ data class ServiceAddress(
 
 ){
     constructor(serviceAddressReq: ServiceAddressReq) : this(
-        utils.newUUID(),
+//        utils.newUUID(),
+        serviceAddressReq.id,
         serviceAddressReq.name,
         serviceAddressReq.address,
     )

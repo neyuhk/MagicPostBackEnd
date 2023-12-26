@@ -66,7 +66,7 @@ data class MovingResp(
 }
 
 data class ServiceAddressReq(
-//    val id : String,
+    val id : String,
     val name : String,
     val address: String,
 )
