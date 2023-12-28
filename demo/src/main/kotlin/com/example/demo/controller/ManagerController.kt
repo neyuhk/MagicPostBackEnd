@@ -14,8 +14,8 @@ class ManagerController(
         val orderStatusServiceImpl: OrderStatusServiceImpl,
         val orderServiceImpl: OrderServiceImpl
 ) {
-    @GetMapping("coming", MediaType.MULTIPART_FORM_DATA_VALUE)
-    fun listComing(@ModelAttribute idReq: IdReq) : MutableList<OrderResp> {
+    @GetMapping("coming/{idReq}")
+    fun listComing(@PathVariable idReq: IdReq) : MutableList<OrderResp> {
         val listComing = upcomingServiceImpl.listComing(idReq.serviceAddressId)
         var listOrder : MutableList<OrderResp> = mutableListOf()
         for(order in listComing)
@@ -23,8 +23,8 @@ class ManagerController(
         return listOrder
     }
 
-    @GetMapping("here", MediaType.MULTIPART_FORM_DATA_VALUE)
-    fun listHere(@ModelAttribute idReq: IdReq) : MutableList<OrderResp> {
+    @GetMapping("here/{idReq}")
+    fun listHere(@PathVariable idReq: IdReq) : MutableList<OrderResp> {
         val listOrderHere = orderHereServiceImpl.listHere(idReq.serviceAddressId)
         var listOrder : MutableList<OrderResp> = mutableListOf()
         for(order in listOrderHere)
@@ -32,8 +32,8 @@ class ManagerController(
         return listOrder
     }
 
-    @GetMapping("moving", MediaType.MULTIPART_FORM_DATA_VALUE)
-    fun listMoving(@ModelAttribute idReq: IdReq) : MutableList<OrderResp> {
+    @GetMapping("moving/{idReq}")
+    fun listMoving(@PathVariable idReq: IdReq) : MutableList<OrderResp> {
         val listMoving = movingServiceImpl.listMove(idReq.serviceAddressId)
         var listOrder : MutableList<OrderResp> = mutableListOf()
         for(order in listMoving)
