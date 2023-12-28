@@ -90,28 +90,42 @@ data class ServiceAddressResp(
 
 data class OrderReq(
 //    val orderId : String,
-    val name : String,
-    val address : String,
-    val weight : Int,
-    val quantity : Int,
-    val oderStatus : String
-)
-
-data class OrderResp(
-        val id: String,
+        val namefrom : String,
+        val phonefrom : String,
         val name : String,
         val address : String,
         val weight : Int,
         val quantity : Int,
+        val description : String,
+        val nameto : String,
+        val phoneto : String,
+)
+
+data class OrderResp(
+        val id: String,
+        val namefrom: String,
+        val phonefrom: String,
+        val name : String,
+        val address : String,
+        val weight : Int,
+        val quantity : Int,
+        val description: String,
+        val nameto: String,
+        val phoneto: String,
         val oderDate : LocalDate,
         val oderStatus : String
 ){
     constructor(oder : Order): this(
         oder.id,
+        oder.namefrom,
+        oder.phonefrom,
         oder.name,
         oder.address,
         oder.weight,
         oder.quantity,
+        oder.description,
+        oder.nameto,
+        oder.phoneto,
         oder.oderDate,
         oder.oderStatus
     )

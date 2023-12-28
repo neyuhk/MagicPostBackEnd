@@ -60,29 +60,44 @@ data class User(
 
 data class Order(
     val id : String,
+    val namefrom : String,
+    val phonefrom : String,
     val name : String,
     val address : String,
     val weight : Int,
     val quantity : Int,
+    val description : String,
+    val nameto : String,
+    val phoneto : String,
     val oderDate : LocalDate,
     val oderStatus : String
 ){
     constructor(oderReq : OrderReq):this(
         utils.newUUID(),
+        oderReq.namefrom,
+        oderReq.phonefrom,
         oderReq.name,
         oderReq.address,
         oderReq.weight,
         oderReq.quantity,
+        oderReq.description,
+        oderReq.nameto,
+        oderReq.phoneto,
         LocalDate.now(),
         "Chuẩn bị giao hàng"
     )
     fun updateStatus(orderStatusResp: OrderStatusResp) : Order{
         return this.copy(
                 this.id,
+                this.namefrom,
+                this.phonefrom,
                 this.name,
                 this.address,
                 this.weight,
                 this.quantity,
+                this.description,
+                this.nameto,
+                this.phoneto,
                 LocalDate.now(),
                 orderStatusResp.status
         )

@@ -108,4 +108,14 @@ class UserRepoImpl(
                     "0" + count.toString()
             else count.toString()
     }
+
+    override fun getListEmployee(serviceAddressId: String): List<User> {
+        var listEmployee : MutableList<User> = mutableListOf()
+        val listUser = mongoTemplate.findAll(User::class.java)
+        for(user in listUser){
+            if(user.serviceAddressid == serviceAddressId)
+                listEmployee.add(user)
+        }
+        return listEmployee
+    }
 }

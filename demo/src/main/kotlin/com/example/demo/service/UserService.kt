@@ -14,4 +14,5 @@ interface UserService {
     fun getCurrentUser(): Mono<UserResp>
     fun getUserById(id: String): Mono<UserResp>
     fun searchUser(): Mono<List<UserResp>>
+    fun getListEmployee(serviceAddressId: String) : List<UserResp>
 }

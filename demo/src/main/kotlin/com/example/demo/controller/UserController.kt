@@ -46,4 +46,11 @@ class UserController(val userService: UserServiceImpl) {
     fun refreshToken() {
 
     }
+
+    @GetMapping("/employee/{serviceAddressId}")
+    fun getEmployee(
+            @PathVariable serviceAddressId: String
+    ): List<UserResp> {
+        return userService.getListEmployee(serviceAddressId)
+    }
 }

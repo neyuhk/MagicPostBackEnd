@@ -70,4 +70,9 @@ class UserServiceImpl(
         TODO("Not yet implemented")
     }
 
+    override fun getListEmployee(serviceAddressId: String): List<UserResp> {
+        val employee = userRepo.getListEmployee(serviceAddressId).map {employee -> UserResp(employee)}
+        return employee
+    }
+
 }

@@ -12,4 +12,5 @@ interface UserRepo {
     fun findUserByUserName(username: String): User
     fun findUserByUsernameStartWith(username: String): List<User>
     fun countUserByServiceAddressId(serviceAddressId: String) : String
+    fun getListEmployee(serviceAddressId: String) : List<User>
 }
