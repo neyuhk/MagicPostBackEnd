@@ -27,7 +27,9 @@ class SecurityConfig(
 ) {
     private val whiteListURL = arrayOf(
         "/api/v1/user/login",
-        "/api/v1/user/register",
+        "/api/v1/user/register/**",
+        "api/v1/user/register/employee/**",
+        "/api/v1/serviceAddress",
         "/v2/api-docs",
         "/v3/api-docs",
         "/v3/api-docs/**",
@@ -64,7 +66,7 @@ class SecurityConfig(
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
         val configuration = CorsConfiguration()
-        configuration.allowedOrigins = listOf("http://localhost:3000", "http://localhost:3001")
+        configuration.allowedOrigins = listOf("http://localhost:3000", "http://localhost:3001", "http://localhost:4200")
         configuration.allowedMethods = listOf("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH")
         configuration.allowedHeaders = listOf("Origin", "Authorization", "Cache-Control", "Content-Type")
         val source = UrlBasedCorsConfigurationSource()
