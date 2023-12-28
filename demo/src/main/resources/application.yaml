@@ -1,7 +1,7 @@
 data:
   mongodb:
     database: blt_web
-    uri: mongodb://root:password@35.198.240.131:27017/admin
+    uri: mongodb://root:password@0.0.0.0:27017/admin
     table:
       user: user
       order: order
@@ -11,7 +11,7 @@ spring:
     mongodb:
       auto-index-creation: true
       database: btl_web
-      uri: mongodb://root:password@35.198.240.131:27017/admin
+      uri: mongodb://root:password@0.0.0.0:27017/admin
 
 
 application:
