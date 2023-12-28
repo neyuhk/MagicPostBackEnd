@@ -66,9 +66,9 @@ data class Order(
     val address : String,
     val weight : Int,
     val quantity : Int,
-    val description : String,
     val nameto : String,
     val phoneto : String,
+    val description : String,
     val oderDate : LocalDate,
     val oderStatus : String
 ){
@@ -80,9 +80,9 @@ data class Order(
         oderReq.address,
         oderReq.weight,
         oderReq.quantity,
-        oderReq.description,
         oderReq.nameto,
         oderReq.phoneto,
+        oderReq.description,
         LocalDate.now(),
         "Chuẩn bị giao hàng"
     )

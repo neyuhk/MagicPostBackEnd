@@ -96,9 +96,9 @@ data class OrderReq(
         val address : String,
         val weight : Int,
         val quantity : Int,
-        val description : String,
         val nameto : String,
         val phoneto : String,
+        val description : String,
 )
 
 data class OrderResp(
@@ -109,9 +109,9 @@ data class OrderResp(
         val address : String,
         val weight : Int,
         val quantity : Int,
-        val description: String,
         val nameto: String,
         val phoneto: String,
+        val description: String,
         val oderDate : LocalDate,
         val oderStatus : String
 ){
@@ -123,9 +123,9 @@ data class OrderResp(
         oder.address,
         oder.weight,
         oder.quantity,
-        oder.description,
         oder.nameto,
         oder.phoneto,
+        oder.description,
         oder.oderDate,
         oder.oderStatus
     )
@@ -159,3 +159,17 @@ data class UpdateReq(
 data class IdReq(
         val serviceAddressId: String
 )
+
+data class BossResp(
+        val serviceAddress: ServiceAddress,
+        val user: User,
+        val countEmployee : String,
+        val countOrder: String
+){
+    constructor(serviceAddress: ServiceAddress, user: User, countEmployee: String, countOrder: Int) : this(
+            serviceAddress,
+            user,
+            countEmployee,
+            countOrder.toString()
+    )
+}

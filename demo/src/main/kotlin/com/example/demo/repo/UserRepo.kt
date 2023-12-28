@@ -7,7 +7,8 @@ interface UserRepo {
     fun addManager(userReq: UserReq, serviceAddressId : String): User
     fun addEmployee(userReq: UserReq, serviceAddressId : String): User
     fun updateUser(user: User): User
-    fun findUserById(id: String): User
+    fun findUserById(id : String) : User
+    fun findUserByServiceAddressId(serviceAddressId: String): User
     fun findUserByEmail(email: String): User
     fun findUserByUserName(username: String): User
     fun findUserByUsernameStartWith(username: String): List<User>

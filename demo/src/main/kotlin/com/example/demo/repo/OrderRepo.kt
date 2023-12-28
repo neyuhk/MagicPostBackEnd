@@ -9,6 +9,5 @@ interface OrderRepo {
     fun getOrder() : List<Order>
     fun orderById(id : String) : Order
     fun updateStatus(orderStatusResp: OrderStatusResp) : Order
-
     fun deleteOrder(orderId : String)
 }

@@ -70,8 +70,20 @@ class UserRepoImpl(
 
     override fun findUserById(id: String): User {
         return mongoTemplate.findById(id, User::class.java)
-            ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "Cannot find user with id $id")
+                ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "Cannot find user with id $id")
 
+    }
+
+    override fun findUserByServiceAddressId(serviceAddressId: String): User {
+//        return mongoTemplate.findById(id, User::class.java)
+//            ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "Cannot find user with id $id")
+//
+        val listUser = mongoTemplate.findAll(User::class.java)
+        for (user in listUser){
+            if(user.serviceAddressid == serviceAddressId)
+                return user
+        }
+        throw ResponseStatusException(HttpStatus.NOT_FOUND, "Cannot find user with id ")
     }
 
     override fun findUserByEmail(email: String): User {
