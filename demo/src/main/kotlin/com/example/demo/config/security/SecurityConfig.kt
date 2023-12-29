@@ -29,6 +29,7 @@ class SecurityConfig(
         "/api/v1/user/login",
         "/api/v1/user/register/**",
         "api/v1/user/register/employee/**",
+            "api/v1/orderStatus/**",
         "/api/v1/serviceAddress",
         "/v2/api-docs",
         "/v3/api-docs",
